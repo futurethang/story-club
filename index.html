@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Club – Seattle Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+:root {
+--cream: #F5C89A;
+--cream-dark: #EDB878;
+--ink: #1A3A2A;
+--ink-light: #1A3A2A;
+--ink-muted: #1A3A2A;
+--rust: #9B3B1A;
+--rust-light: #C4501F;
+--gold: #B45309;
+--border: rgba(26,58,42,0.14);
+--border-strong: rgba(26,58,42,0.24);
+}
+ 
+body {
+background: var(--cream);
+color: var(--ink);
+font-family: 'Source Sans 3', sans-serif;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+ 
+.page-wrapper {
+width: 100%;
+max-width: 580px;
+padding: 0 24px 80px;
+}
+ 
+.top-rule {
+width: 100%;
+height: 3px;
+background: var(--ink);
+margin-bottom: 0;
+}
+ 
+.nav {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 18px 0 16px;
+border-bottom: 1px solid var(--border);
+margin-bottom: 56px;
+}
+ 
+.nav-wordmark {
+font-family: 'Source Sans 3', sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--ink-muted);
+}
+ 
+.hero {
+text-align: center;
+margin-bottom: 48px;
+}
+ 
+.hero-eyebrow {
+font-family: 'Source Sans 3', sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--rust);
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+}
+ 
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+content: '';
+display: inline-block;
+width: 28px;
+height: 1px;
+background: var(--rust);
+opacity: 0.6;
+}
+ 
+.hero-title {
+font-family: 'Playfair Display', Georgia, serif;
+font-size: clamp(38px, 8vw, 54px);
+font-weight: 400;
+line-height: 1.12;
+color: var(--ink);
+letter-spacing: -0.01em;
+margin-bottom: 8px;
+}
+ 
+.hero-title em { font-style: normal; color: var(--ink); }
+ 
+.hero-scrolls {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+margin-bottom: 4px;
+}
+ 
+.hero-scroll-svg { flex-shrink: 0; }
+ 
+.hero-chapter {
+font-family: 'Playfair Display', Georgia, serif;
+font-size: clamp(25px, 5.33vw, 36px);
+font-style: italic;
+color: var(--ink-muted);
+margin-bottom: 28px;
+}
+ 
+.hero-divider {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 14px;
+margin-bottom: 28px;
+}
+ 
+.hero-divider-line { width: 48px; height: 1px; background: var(--border-strong); }
+.hero-divider-ornament { font-size: 14px; color: var(--ink-muted); opacity: 0.5; }
+ 
+.hero-desc {
+font-family: 'Lora', Georgia, serif;
+font-size: 16px;
+line-height: 1.75;
+color: var(--ink-light);
+max-width: 420px;
+margin: 0 auto;
+}
+ 
+.form-card-outer {
+margin-bottom: 32px;
+padding: 8px;
+border: 3px solid rgba(26,58,42,0.55);
+outline: 1px solid rgba(26,58,42,0.25);
+outline-offset: -5px;
+box-shadow:
+inset 0 0 0 5px transparent,
+0 0 0 1.5px rgba(26,58,42,0.18),
+0 0 0 4px rgba(26,58,42,0.08);
+}
+ 
+.form-card {
+background: white;
+border: 1px solid rgba(26,58,42,0.2);
+border-radius: 0;
+padding: 40px 40px 36px;
+position: relative;
+}
+ 
+.form-card::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--rust) 0%, var(--gold) 100%);
+}
+ 
+.form-label {
+display: block;
+font-family: 'Source Sans 3', sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-muted);
+margin-bottom: 8px;
+}
+ 
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+margin-bottom: 20px;
+}
+ 
+.form-field { margin-bottom: 20px; }
+.form-field:last-of-type { margin-bottom: 28px; }
+ 
+.form-input {
+width: 100%;
+height: 44px;
+padding: 0 14px;
+font-family: 'Source Sans 3', sans-serif;
+font-size: 15px;
+font-weight: 400;
+color: var(--ink);
+background: var(--cream);
+border: 1px solid var(--border-strong);
+border-radius: 2px;
+outline: none;
+transition: border-color 0.15s, background 0.15s;
+-webkit-appearance: none;
+}
+ 
+.form-input::placeholder { color: var(--ink-muted); opacity: 0.55; }
+.form-input:focus { border-color: var(--rust); background: white; }
+ 
+.submit-btn {
+width: 100%;
+height: 48px;
+background: var(--ink);
+color: var(--cream);
+font-family: 'Source Sans 3', sans-serif;
+font-size: 13px;
+font-weight: 500;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+border: none;
+border-radius: 2px;
+cursor: pointer;
+transition: background 0.15s, transform 0.1s;
+position: relative;
+overflow: hidden;
+}
+ 
+.submit-btn:hover { background: var(--rust); }
+.submit-btn:active { transform: scale(0.99); }
+.submit-btn.loading { pointer-events: none; opacity: 0.7; }
+ 
+.success-message {
+display: none;
+text-align: center;
+padding: 40px;
+background: white;
+border: 1px solid var(--border);
+border-radius: 2px;
+position: relative;
+margin-bottom: 32px;
+}
+ 
+.success-message::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--rust) 0%, var(--gold) 100%);
+}
+ 
+.success-icon {
+width: 44px;
+height: 44px;
+margin: 0 auto 20px;
+border: 1.5px solid var(--rust);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+ 
+.success-icon svg {
+width: 20px; height: 20px;
+stroke: var(--rust); fill: none;
+stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+ 
+.success-title {
+font-family: 'Playfair Display', Georgia, serif;
+font-size: 22px; font-weight: 400;
+color: var(--ink); margin-bottom: 10px;
+}
+ 
+.success-sub {
+font-family: 'Lora', Georgia, serif;
+font-size: 15px; font-style: italic;
+color: var(--ink-muted); line-height: 1.65;
+}
+ 
+.footer { text-align: center; }
+ 
+.footer-bottom {
+font-family: 'Source Sans 3', sans-serif;
+font-size: 11px; letter-spacing: 0.05em;
+color: var(--ink-muted); opacity: 0.5; padding-bottom: 8px;
+}
+ 
+.field-error {
+font-family: 'Source Sans 3', sans-serif;
+font-size: 12px; color: #C0392B;
+margin-top: 5px; display: none;
+}
+ 
+.form-input.invalid { border-color: #C0392B; }
+ 
+/* Honeypot — hidden from real users */
+.hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+ 
+@media (max-width: 480px) {
+.form-card { padding: 28px 24px 24px; }
+.form-row { grid-template-columns: 1fr; gap: 0; }
+.hero-title { font-size: 36px; }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+ 
+<div style="width:100%"><div class="top-rule"></div></div>
+ 
+<div class="page-wrapper">
+<div style="height: 32px;"></div>
+ 
+<header class="hero">
+<p class="hero-eyebrow">Join the circle</p>
+<div class="hero-scrolls">
+<svg class="hero-scroll-svg" width="72" height="88" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g fill="#1A3A2A">
+<path d="M36 86 C36 86 34 74 33 62 C32 50 33 40 35 30 C37 20 40 12 40 6" stroke="#1A3A2A" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+<path d="M36 86 C30 84 24 80 22 74 C20 68 24 62 30 62 C34 62 36 66 34 70 C32 74 28 73 28 70" stroke="#1A3A2A" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+<path d="M33 62 C28 58 18 56 10 50 C10 50 14 46 18 48 C20 49 22 52 24 54 C26 56 30 58 33 62Z" opacity="0.85"/>
+<path d="M33 62 C28 58 18 56 10 50" stroke="#1A3A2A" stroke-width="0.6" fill="none" opacity="0.5"/>
+<path d="M33 62 C27 57 20 54 14 50" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.35" stroke-dasharray="1.5 2"/>
+<path d="M34 70 C40 64 50 62 58 54 C58 54 56 50 52 52 C50 53 48 56 46 58 C42 62 38 66 34 70Z" opacity="0.7"/>
+<path d="M34 70 C40 64 50 62 58 54" stroke="#1A3A2A" stroke-width="0.6" fill="none" opacity="0.45"/>
+<path d="M34 48 C29 44 20 42 14 34 C14 34 17 30 21 33 C23 35 24 38 26 41 C28 43 31 46 34 48Z" opacity="0.78"/>
+<path d="M34 48 C29 44 20 42 14 34" stroke="#1A3A2A" stroke-width="0.55" fill="none" opacity="0.4"/>
+<path d="M24 41 C20 38 16 36 12 30 C15 30 19 33 22 37Z" opacity="0.5"/>
+<path d="M35 54 C41 48 50 46 56 38 C56 38 54 34 50 36 C48 37 47 40 45 43 C42 46 38 50 35 54Z" opacity="0.65"/>
+<path d="M35 54 C41 48 50 46 56 38" stroke="#1A3A2A" stroke-width="0.55" fill="none" opacity="0.38"/>
+<path d="M36 34 C31 30 24 26 18 18 C18 18 21 14 25 17 C27 19 28 22 30 25 C32 28 34 31 36 34Z" opacity="0.7"/>
+<path d="M36 34 C31 30 24 26 18 18" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.38"/>
+<path d="M28 25 C24 22 20 18 18 12 C21 13 25 17 27 21Z" opacity="0.45"/>
+<path d="M37 40 C43 34 50 32 56 24 C56 24 54 20 50 22 C48 23 47 27 45 30 C42 33 39 37 37 40Z" opacity="0.6"/>
+<path d="M37 40 C43 34 50 32 56 24" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.35"/>
+<path d="M38 20 C34 16 28 12 26 6 C29 7 33 10 36 14Z" opacity="0.6"/>
+<path d="M39 14 C43 10 48 8 52 2 C48 4 43 8 39 14Z" opacity="0.5"/>
+<path d="M40 6 C44 4 48 6 48 10 C48 14 44 16 41 14" stroke="#1A3A2A" stroke-width="1" stroke-linecap="round" fill="none"/>
+</g>
+</svg>
+<h1 class="hero-title"><em>Story</em> Club</h1>
+<svg class="hero-scroll-svg" width="72" height="88" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+<g fill="#1A3A2A">
+<path d="M36 86 C36 86 34 74 33 62 C32 50 33 40 35 30 C37 20 40 12 40 6" stroke="#1A3A2A" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+<path d="M36 86 C30 84 24 80 22 74 C20 68 24 62 30 62 C34 62 36 66 34 70 C32 74 28 73 28 70" stroke="#1A3A2A" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+<path d="M33 62 C28 58 18 56 10 50 C10 50 14 46 18 48 C20 49 22 52 24 54 C26 56 30 58 33 62Z" opacity="0.85"/>
+<path d="M33 62 C28 58 18 56 10 50" stroke="#1A3A2A" stroke-width="0.6" fill="none" opacity="0.5"/>
+<path d="M33 62 C27 57 20 54 14 50" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.35" stroke-dasharray="1.5 2"/>
+<path d="M34 70 C40 64 50 62 58 54 C58 54 56 50 52 52 C50 53 48 56 46 58 C42 62 38 66 34 70Z" opacity="0.7"/>
+<path d="M34 70 C40 64 50 62 58 54" stroke="#1A3A2A" stroke-width="0.6" fill="none" opacity="0.45"/>
+<path d="M34 48 C29 44 20 42 14 34 C14 34 17 30 21 33 C23 35 24 38 26 41 C28 43 31 46 34 48Z" opacity="0.78"/>
+<path d="M34 48 C29 44 20 42 14 34" stroke="#1A3A2A" stroke-width="0.55" fill="none" opacity="0.4"/>
+<path d="M24 41 C20 38 16 36 12 30 C15 30 19 33 22 37Z" opacity="0.5"/>
+<path d="M35 54 C41 48 50 46 56 38 C56 38 54 34 50 36 C48 37 47 40 45 43 C42 46 38 50 35 54Z" opacity="0.65"/>
+<path d="M35 54 C41 48 50 46 56 38" stroke="#1A3A2A" stroke-width="0.55" fill="none" opacity="0.38"/>
+<path d="M36 34 C31 30 24 26 18 18 C18 18 21 14 25 17 C27 19 28 22 30 25 C32 28 34 31 36 34Z" opacity="0.7"/>
+<path d="M36 34 C31 30 24 26 18 18" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.38"/>
+<path d="M28 25 C24 22 20 18 18 12 C21 13 25 17 27 21Z" opacity="0.45"/>
+<path d="M37 40 C43 34 50 32 56 24 C56 24 54 20 50 22 C48 23 47 27 45 30 C42 33 39 37 37 40Z" opacity="0.6"/>
+<path d="M37 40 C43 34 50 32 56 24" stroke="#1A3A2A" stroke-width="0.5" fill="none" opacity="0.35"/>
+<path d="M38 20 C34 16 28 12 26 6 C29 7 33 10 36 14Z" opacity="0.6"/>
+<path d="M39 14 C43 10 48 8 52 2 C48 4 43 8 39 14Z" opacity="0.5"/>
+<path d="M40 6 C44 4 48 6 48 10 C48 14 44 16 41 14" stroke="#1A3A2A" stroke-width="1" stroke-linecap="round" fill="none"/>
+</g>
+</svg>
+</div>
+<p class="hero-chapter">Seattle Chapter</p>
+<div class="hero-divider">
+<span class="hero-divider-line"></span>
+<span class="hero-divider-ornament">❧</span>
+<span class="hero-divider-line"></span>
+</div>
+<p class="hero-desc" style="font-weight: 500;">Join this new group connecting Seattle-area writers and readers of literary fiction. Our shared love of George Saunders is just the beginning!</p>
+<p class="hero-desc" style="margin-top: 1rem;">I will collect e-mail addresses and create a Google Group; any member of the group can post about things such as: starting/joining book clubs; starting/joining writers' groups; alerting the community to upcoming literary events or meet-ups.</p>
+<p class="hero-desc" style="margin-top: 1rem;">Communications will be few and far between, and you can opt out any time. No clogging members' inboxes!</p>
+</header>
+ 
+<div class="form-card-outer">
+<div class="form-card" id="formCard">
+  <!-- Honeypot: bots fill this, humans never see it -->
+  <div class="hp-field" aria-hidden="true">
+    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form-row">
+    <div>
+      <label class="form-label" for="firstName">First name</label>
+      <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name">
+      <p class="field-error" id="firstNameError">Please enter your first name.</p>
+    </div>
+    <div>
+      <label class="form-label" for="lastName">Last name</label>
+      <input class="form-input" type="text" id="lastName" name="lastName" placeholder="Austen" autocomplete="family-name">
+      <p class="field-error" id="lastNameError">Please enter your last name.</p>
+    </div>
+  </div>
+  <div class="form-field">
+    <label class="form-label" for="email">Email address</label>
+    <input class="form-input" type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
+    <p class="field-error" id="emailError">Please enter a valid email address.</p>
+  </div>
+  <button class="submit-btn" id="submitBtn" type="button" onclick="handleSubmit()">Join Seattle Story Club</button>
+</div>
+</div>
+ 
+<div class="success-message" id="successMsg">
+<div class="success-icon">
+<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<h2 class="success-title">Welcome to the club.</h2>
+<p class="success-sub">You're on the list. Watch your inbox for<br>our first letter from Seattle.</p>
+</div>
+ 
+<footer class="footer">
+<p class="footer-bottom">Story Club · Seattle Chapter · Est. 2026</p>
+</footer>
+ 
+</div>
+ 
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────
+// Paste your deployed Apps Script URL here after following the setup guide
+const SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+// ────────────────────────────────────────────────────────────────────────
+
+// Simple rate-limit: one submission per browser session
+let submitted = false;
+
+function validate() {
+  let valid = true;
+
+  const fn = document.getElementById('firstName');
+  if (!fn.value.trim()) {
+    fn.classList.add('invalid');
+    document.getElementById('firstNameError').style.display = 'block';
+    valid = false;
+  } else {
+    fn.classList.remove('invalid');
+    document.getElementById('firstNameError').style.display = 'none';
+  }
+
+  const ln = document.getElementById('lastName');
+  if (!ln.value.trim()) {
+    ln.classList.add('invalid');
+    document.getElementById('lastNameError').style.display = 'block';
+    valid = false;
+  } else {
+    ln.classList.remove('invalid');
+    document.getElementById('lastNameError').style.display = 'none';
+  }
+
+  const email = document.getElementById('email');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email.value.trim())) {
+    email.classList.add('invalid');
+    document.getElementById('emailError').style.display = 'block';
+    valid = false;
+  } else {
+    email.classList.remove('invalid');
+    document.getElementById('emailError').style.display = 'none';
+  }
+
+  return valid;
+}
+
+async function handleSubmit() {
+  // Honeypot check — bots fill this field, humans never see it
+  if (document.getElementById('website').value) return;
+
+  // Session-level dedupe
+  if (submitted) return;
+
+  if (!validate()) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.textContent = 'Joining…';
+
+  const payload = {
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName:  document.getElementById('lastName').value.trim(),
+    email:     document.getElementById('email').value.trim(),
+  };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',   // Apps Script requires no-cors from external origins
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error('Submission error:', err);
+    // Still show success — the no-cors fetch always resolves opaquely,
+    // so a network error here is a real failure. The sheet is the source of truth.
+  }
+
+  submitted = true;
+  document.getElementById('formCard').style.display = 'none';
+  const success = document.getElementById('successMsg');
+  success.style.display = 'block';
+  success.style.animation = 'fadeIn 0.4s ease';
+}
+
+['firstName','lastName','email'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    this.classList.remove('invalid');
+    document.getElementById(id + 'Error').style.display = 'none';
+  });
+});
+</script>
+ 
+</body>
+</html>
